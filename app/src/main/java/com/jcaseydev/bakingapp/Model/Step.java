@@ -15,6 +15,10 @@ public class Step implements Parcelable{
     private String videoUrl;
     private String thumbnail;
 
+    //Constructor
+    public Step(){}
+
+    //Getters
     public int getId() {
         return id;
     }
@@ -35,6 +39,28 @@ public class Step implements Parcelable{
         return thumbnail;
     }
 
+    //Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    //Parcelable Stuff
     @Override
     public int describeContents() {
         return 0;

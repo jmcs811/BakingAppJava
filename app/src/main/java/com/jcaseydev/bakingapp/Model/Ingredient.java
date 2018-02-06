@@ -13,6 +13,10 @@ public class Ingredient implements Parcelable{
     private String measure;
     private String ingredient;
 
+    //Constructor
+    public Ingredient(){}
+
+    //Getters
     public float getQuantity() {
         return quantity;
     }
@@ -25,6 +29,21 @@ public class Ingredient implements Parcelable{
         return ingredient;
     }
 
+    //Setters
+    public void setQuantity(float quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setMeasure(String measure) {
+        this.measure = measure;
+    }
+
+    public void setIngredient(String ingredient) {
+        this.ingredient = ingredient;
+    }
+
+
+    //Parcelable Stuff
     @Override
     public int describeContents() {
         return 0;

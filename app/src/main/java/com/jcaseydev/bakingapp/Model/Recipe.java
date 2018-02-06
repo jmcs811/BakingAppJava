@@ -17,6 +17,10 @@ public class Recipe implements Parcelable{
     private List<Ingredient> ingredients;
     private List<Step> steps;
 
+    //Constructor
+    public Recipe(){}
+
+    //Getters
     public String getName() {
         return name;
     }
@@ -33,10 +37,30 @@ public class Recipe implements Parcelable{
         return steps;
     }
 
+    //Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setServings(String servings) {
+        this.servings = servings;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setSteps(List<Step> steps) {
+        this.steps = steps;
+    }
+
+
+    //Parcelable Stuff
     @Override
     public int describeContents() {
         return 0;
     }
+
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
