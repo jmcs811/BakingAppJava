@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -33,7 +36,13 @@ public class MainFragment extends Fragment {
 
     String jsonURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
-    @Override
+    RecyclerView recipeListView;
+    RecyclerView.Adapter adapter;
+    RecyclerView.LayoutManager layoutManager;
+
+    private List<Recipe> recipesList = new ArrayList<>();
+
+
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -42,6 +51,12 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
+
+        recipeListView = v.findViewById(R.id.recipe_recycler_view);
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        adapter = new MyAdapter();
+        recipeListView.setAdapter(adapter);
+
         return v;
     }
 
@@ -51,18 +66,6 @@ public class MainFragment extends Fragment {
         GetData gd = new GetData();
         gd.execute(jsonURL);
     }
-
-    /**   private void getJson() throws IOException {
-        String url = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
-        OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-
-            Response response = client.newCall(request).execute();
-
-            System.out.println(response.body().string());
-        }**/
 
     private class GetData extends AsyncTask<String, Void, Recipe[]> {
 
@@ -101,7 +104,7 @@ public class MainFragment extends Fragment {
          final String TAG_QUANTITY = "quantity";
          final String TAG_MEASURE = "measure";
          final String TAG_INGREDIENT = "ingredient";
-         final String TAG_SETPS = "setps";
+         final String TAG_STEPS = "steps";
          final String TAG_SDESCP = "shortDescription";
          final String TAG_DESCP = "description";
          final String TAG_VURL = "videoURL";
@@ -118,8 +121,6 @@ public class MainFragment extends Fragment {
 
              recipes[i].setName(recipeInfo.getString(TAG_NAME));
              recipes[i].setServings(recipeInfo.getString(TAG_SERVINGS));
-
-             Log.d("RECIPES", recipes[i].getName());
 
              List<Ingredient> ingredientList = new ArrayList<>();
              List<Step> stepList = new ArrayList<>();
@@ -141,7 +142,7 @@ public class MainFragment extends Fragment {
 
              recipes[i].setIngredients(ingredientList);
 
-             JSONArray stepArray = new JSONArray(recipeInfo.getString(TAG_SETPS));
+             JSONArray stepArray = new JSONArray(recipeInfo.getString(TAG_STEPS));
              Step[] steps = new Step[stepArray.length()];
 
              for(int k = 0; k < stepArray.length(); k++) {
@@ -161,5 +162,13 @@ public class MainFragment extends Fragment {
          }
          return recipes;
      }
-   }
+
+        @Override
+        protected void onPostExecute(Recipe[] recipes) {
+            super.onPostExecute(recipes);
+            if(recipes != null) {
+                recipesList.addAll(Arrays.asList(recipes));
+            }
+        }
+    }
 }
