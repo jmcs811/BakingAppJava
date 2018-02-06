@@ -6,10 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jcaseydev.bakingapp.Model.Ingredient;
 import com.jcaseydev.bakingapp.Model.Recipe;
@@ -54,15 +55,17 @@ public class MainFragment extends Fragment {
 
         recipeListView = v.findViewById(R.id.recipe_recycler_view);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        adapter = new MyAdapter();
-        recipeListView.setAdapter(adapter);
+        recipeListView.setLayoutManager(layoutManager);
 
+        adapter = new MyAdapter(recipesList);
+        recipeListView.setAdapter(adapter);
         return v;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        recipesList.clear();
         GetData gd = new GetData();
         gd.execute(jsonURL);
     }
@@ -168,7 +171,47 @@ public class MainFragment extends Fragment {
             super.onPostExecute(recipes);
             if(recipes != null) {
                 recipesList.addAll(Arrays.asList(recipes));
+                //Toast.makeText(getContext(), "list filled", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getContext(), "SORRY NO DATA", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+
+
+    private class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+
+        private List<Recipe> dataSet;
+
+        class ViewHolder extends RecyclerView.ViewHolder{
+            TextView recipeName;
+
+            ViewHolder(View itemView) {
+                super(itemView);
+                recipeName = itemView.findViewById(R.id.recipe_name);
+            }
+        }
+
+        MyAdapter(List<Recipe> recipes){
+            dataSet = recipes;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item, parent, false);
+
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
+            holder.recipeName.setText(dataSet.get(position).getName());
+        }
+
+        @Override
+        public int getItemCount() {
+            return dataSet.size();
         }
     }
 }
