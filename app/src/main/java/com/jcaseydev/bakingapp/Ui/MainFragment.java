@@ -1,4 +1,4 @@
-package com.jcaseydev.bakingapp;
+package com.jcaseydev.bakingapp.Ui;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,12 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.jcaseydev.bakingapp.Adapter.RecipeAdapter;
 import com.jcaseydev.bakingapp.Model.Ingredient;
 import com.jcaseydev.bakingapp.Model.Recipe;
 import com.jcaseydev.bakingapp.Model.Step;
+import com.jcaseydev.bakingapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,7 +57,7 @@ public class MainFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recipeListView.setLayoutManager(layoutManager);
 
-        adapter = new MyAdapter(recipesList);
+        adapter = new RecipeAdapter(recipesList);
         recipeListView.setAdapter(adapter);
 
         return v;
@@ -176,39 +176,6 @@ public class MainFragment extends Fragment {
                 recipesList.addAll(Arrays.asList(recipes));
                 adapter.notifyDataSetChanged();
             }
-        }
-    }
-
-    private class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-        private List<Recipe> dataSet;
-
-        class ViewHolder extends RecyclerView.ViewHolder{
-            TextView recipeName;
-
-            ViewHolder(View itemView) {
-                super(itemView);
-                recipeName = itemView.findViewById(R.id.recipe_name);
-            }
-        }
-
-        MyAdapter(List<Recipe> recipes) {
-            dataSet = recipes;
-        }
-
-        @Override
-        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item, parent, false);
-            return new ViewHolder(view);
-        }
-
-        public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
-            holder.recipeName.setText(dataSet.get(position).getName());
-        }
-
-
-        @Override
-        public int getItemCount() {
-            return dataSet.size();
         }
     }
 }
