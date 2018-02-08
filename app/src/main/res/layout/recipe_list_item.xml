@@ -6,11 +6,15 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/recipe_thumbnail"
+        android:id="@+id/recipe_thumbnail"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
-        android:layout_height="wrap_content"
+        android:id="@+id/recipe_name"
         android:layout_width="match_parent"
-        android:id="@+id/recipe_name" />
+        android:layout_height="wrap_content"
+        android:textSize="24sp" />
 
 </RelativeLayout>
