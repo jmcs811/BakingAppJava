@@ -36,7 +36,7 @@ import okhttp3.Response;
 public class MainFragment extends Fragment {
 
     //String jsonURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
-    String jsonURL = "https://api.myjson.com/bins/120vox";
+    String jsonURL = "https://api.myjson.com/bins/70uzt";
 
     RecyclerView recipeListView;
     RecyclerView.Adapter adapter;

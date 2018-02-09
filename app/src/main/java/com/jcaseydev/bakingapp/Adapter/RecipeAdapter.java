@@ -1,6 +1,8 @@
 package com.jcaseydev.bakingapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import com.jcaseydev.bakingapp.Model.Recipe;
 import com.jcaseydev.bakingapp.R;
+import com.jcaseydev.bakingapp.Ui.StepActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,16 +25,31 @@ import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
     private List<Recipe> dataSet;
+    private RecyclerView recyclerView;
+    private int itemPosition;
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView recipeName;
         ImageView recipeThumbnail;
+        CardView cardView;
+        //private final Context context;
 
         ViewHolder(View itemView) {
             super(itemView);
+           // context = itemView.getContext();
             recipeName = itemView.findViewById(R.id.recipe_name);
             recipeThumbnail = itemView.findViewById(R.id.recipe_thumbnail);
+            recyclerView = itemView.findViewById(R.id.recipe_recycler_view);
+            cardView = itemView.findViewById(R.id.card_view);
         }
+
+      //  @Override
+      //  public void onClick(View v) {
+     //       itemPosition = recyclerView.getChildAdapterPosition(v);
+     //       Intent intent = new Intent(context, StepActivity.class);
+     //       context.startActivity(intent);
+      //  }
     }
 
     public RecipeAdapter(List<Recipe> recipes) {
@@ -42,16 +60,25 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public RecipeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recipe_list_item, parent, false);
+
         return new ViewHolder(view);
     }
 
     public void onBindViewHolder(RecipeAdapter.ViewHolder holder, int position) {
-        Context context = holder.recipeThumbnail.getContext();
+        final Context context = holder.recipeThumbnail.getContext();
 
         holder.recipeName.setText(dataSet.get(position).getName());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context newContext = v.getContext();
+                Intent intent = new Intent(newContext, StepActivity.class);
+                newContext.startActivity(intent);
+            }
+        });
 
         if (dataSet.get(position).getImage().isEmpty()) {
-            Log.d("IMAGE PATH IS NULL", "IMAGE PATH IS NULL");
+            Log.d("RecipeAdapter.class", "Image Path is empty");
         }else{
             Log.d("image != null", dataSet.get(position).getImage() + "yeah");
             Picasso.with(context).load(dataSet.get(position)
