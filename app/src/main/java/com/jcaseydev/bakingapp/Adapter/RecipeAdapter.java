@@ -26,30 +26,20 @@ import java.util.List;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
     private List<Recipe> dataSet;
     private RecyclerView recyclerView;
-    private int itemPosition;
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView recipeName;
         ImageView recipeThumbnail;
         CardView cardView;
-        //private final Context context;
 
         ViewHolder(View itemView) {
             super(itemView);
-           // context = itemView.getContext();
             recipeName = itemView.findViewById(R.id.recipe_name);
             recipeThumbnail = itemView.findViewById(R.id.recipe_thumbnail);
             recyclerView = itemView.findViewById(R.id.recipe_recycler_view);
             cardView = itemView.findViewById(R.id.card_view);
         }
-
-      //  @Override
-      //  public void onClick(View v) {
-     //       itemPosition = recyclerView.getChildAdapterPosition(v);
-     //       Intent intent = new Intent(context, StepActivity.class);
-     //       context.startActivity(intent);
-      //  }
     }
 
     public RecipeAdapter(List<Recipe> recipes) {
