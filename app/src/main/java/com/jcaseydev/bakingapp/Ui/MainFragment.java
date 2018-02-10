@@ -36,13 +36,13 @@ import okhttp3.Response;
 public class MainFragment extends Fragment {
 
     //String jsonURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
-    String jsonURL = "https://api.myjson.com/bins/70uzt";
+    String jsonURL = "https://api.myjson.com/bins/oereh";
 
     RecyclerView recipeListView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
 
-    private List<Recipe> recipesList = new ArrayList<>();
+    private ArrayList<Recipe> recipesList = new ArrayList<>();
 
 
     public void onCreate(@Nullable Bundle savedInstanceState) {

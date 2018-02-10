@@ -2,30 +2,30 @@ package com.jcaseydev.bakingapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jcaseydev.bakingapp.Model.Recipe;
 import com.jcaseydev.bakingapp.R;
 import com.jcaseydev.bakingapp.Ui.StepActivity;
+import com.jcaseydev.bakingapp.Ui.StepFragment;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by jcasey on 2/7/18.
  */
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
-    private List<Recipe> dataSet;
-    private RecyclerView recyclerView;
+    private ArrayList<Recipe> dataSet = new ArrayList<>();
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -37,12 +37,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             super(itemView);
             recipeName = itemView.findViewById(R.id.recipe_name);
             recipeThumbnail = itemView.findViewById(R.id.recipe_thumbnail);
-            recyclerView = itemView.findViewById(R.id.recipe_recycler_view);
             cardView = itemView.findViewById(R.id.card_view);
         }
     }
 
-    public RecipeAdapter(List<Recipe> recipes) {
+    public RecipeAdapter(ArrayList<Recipe> recipes) {
         dataSet = recipes;
     }
 
@@ -54,8 +53,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
-    public void onBindViewHolder(RecipeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecipeAdapter.ViewHolder holder, final int position) {
         final Context context = holder.recipeThumbnail.getContext();
+        final int currentPos = holder.getAdapterPosition();
 
         holder.recipeName.setText(dataSet.get(position).getName());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -63,14 +63,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             public void onClick(View v) {
                 Context newContext = v.getContext();
                 Intent intent = new Intent(newContext, StepActivity.class);
+              /**  Fragment fragment = new StepFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("STEPS", dataSet.get(currentPos));
+                fragment.setArguments(bundle);**/
                 newContext.startActivity(intent);
             }
         });
 
         if (dataSet.get(position).getImage().isEmpty()) {
-            Log.d("RecipeAdapter.class", "Image Path is empty");
+            holder.recipeThumbnail.setVisibility(View.INVISIBLE);
         }else{
-            Log.d("image != null", dataSet.get(position).getImage() + "yeah");
             Picasso.with(context).load(dataSet.get(position)
                     .getImage())
                     .placeholder(R.drawable.error)
