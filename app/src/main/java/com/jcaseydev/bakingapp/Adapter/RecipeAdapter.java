@@ -2,8 +2,6 @@ package com.jcaseydev.bakingapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import com.jcaseydev.bakingapp.Model.Recipe;
 import com.jcaseydev.bakingapp.R;
 import com.jcaseydev.bakingapp.Ui.StepActivity;
-import com.jcaseydev.bakingapp.Ui.StepFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -63,10 +60,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             public void onClick(View v) {
                 Context newContext = v.getContext();
                 Intent intent = new Intent(newContext, StepActivity.class);
-              /**  Fragment fragment = new StepFragment();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("STEPS", dataSet.get(currentPos));
-                fragment.setArguments(bundle);**/
+                intent.putExtra("STEPS", dataSet.get(currentPos));
                 newContext.startActivity(intent);
             }
         });
