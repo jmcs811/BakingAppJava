@@ -1,16 +1,18 @@
 package com.jcaseydev.bakingapp.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jcaseydev.bakingapp.Model.Recipe;
 import com.jcaseydev.bakingapp.Model.Step;
 import com.jcaseydev.bakingapp.R;
+import com.jcaseydev.bakingapp.Ui.StepDetailActivity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -21,11 +23,13 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
     private ArrayList<Step> dataSet = new ArrayList<>();
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView stepShortDescp;
+        TextView stepName;
+        CardView stepCardView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            stepShortDescp = itemView.findViewById(R.id.step_short_desp);
+            stepName = itemView.findViewById(R.id.step_short_descp);
+            stepCardView = itemView.findViewById(R.id.step_card_view);
         }
     }
 
@@ -36,14 +40,23 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.step_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.step_list_item, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.stepShortDescp.setText(dataSet.get(position).getShortDescription());
+        holder.stepName.setText(dataSet.get(position).getShortDescription());
+        holder.stepCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, StepDetailActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -4,17 +4,21 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jcaseydev.bakingapp.Adapter.StepAdapter;
 import com.jcaseydev.bakingapp.Model.Recipe;
 import com.jcaseydev.bakingapp.Model.Step;
 import com.jcaseydev.bakingapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,7 +40,9 @@ public class StepFragment extends Fragment{
 
         if (getArguments() != null){
             rList = getArguments().getParcelable("STEPS/INGREDIENTS");
-            stepArrayList = rList.getSteps();
+            if (rList != null) {
+                stepArrayList = rList.getSteps();
+            }
         }
     }
 
@@ -55,24 +61,29 @@ public class StepFragment extends Fragment{
             ingredint.setId(i + 5);
             ingredint.setText(rList.getIngredients().get(i).getIngredient());
             ingredint.setAllCaps(true);
+            ingredint.setTextSize(12);
             ingredint.setTypeface(null, Typeface.BOLD);
 
             quantityAndMeasure.setId(i + 4);
+            quantityAndMeasure.setTextSize(10);
             quantityAndMeasure.setText(rList.getIngredients().get(i).getQuantity() + " " + rList.getIngredients().get(i).getMeasure());
 
             ingredientLayout.addView(ingredint);
             ingredientLayout.addView(quantityAndMeasure);
         }
 
-       /** stepsView = v.findViewById(R.id.step_recycler_view);
+        stepsView = v.findViewById(R.id.step_recycler_view);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         stepsView.setLayoutManager(layoutManager);
 
         ArrayList<Step> newsteps = new ArrayList<>(stepArrayList);
+        if (!newsteps.isEmpty()){
+            Log.d("THIS IS A TEST", newsteps.get(0).getShortDescription());
+        }
 
         stepsAdapter = new StepAdapter(newsteps);
-        stepsView.setAdapter(stepsAdapter);**/
-
+        stepsView.setAdapter(stepsAdapter);
+        stepsAdapter.notifyDataSetChanged();
         return v;
     }
 }

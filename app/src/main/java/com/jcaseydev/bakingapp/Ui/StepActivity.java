@@ -1,17 +1,12 @@
 package com.jcaseydev.bakingapp.Ui;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.jcaseydev.bakingapp.Model.Ingredient;
 import com.jcaseydev.bakingapp.Model.Recipe;
 import com.jcaseydev.bakingapp.R;
-
-import java.util.ArrayList;
 
 /**
  * Created by jcasey on 2/8/18.
@@ -33,9 +28,6 @@ public class StepActivity extends AppCompatActivity{
         bundle = getIntent().getExtras();
         if (bundle != null) {
             rList = bundle.getParcelable("STEPS");
-           // for (int i = 0; i < rList.getIngredients().size(); i++){
-           //     Log.d("INGREDIENTS LIST", rList.getIngredients().get(i).getIngredient());
-           // }
         }
 
         Bundle newBundle = new Bundle();
