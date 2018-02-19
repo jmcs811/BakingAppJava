@@ -55,20 +55,20 @@ public class StepFragment extends Fragment{
 
         //Ingredients List
         for (int i = 0; i < rList.getIngredients().size(); i++){
-            TextView ingredint = new TextView(getContext());
+            TextView ingredient = new TextView(getContext());
             TextView quantityAndMeasure = new TextView(getContext());
 
-            ingredint.setId(i + 5);
-            ingredint.setText(rList.getIngredients().get(i).getIngredient());
-            ingredint.setAllCaps(true);
-            ingredint.setTextSize(12);
-            ingredint.setTypeface(null, Typeface.BOLD);
+            ingredient.setId(i + 5);
+            ingredient.setText(rList.getIngredients().get(i).getIngredient());
+            ingredient.setAllCaps(true);
+            ingredient.setTextSize(12);
+            ingredient.setTypeface(null, Typeface.BOLD);
 
             quantityAndMeasure.setId(i + 4);
             quantityAndMeasure.setTextSize(10);
             quantityAndMeasure.setText(rList.getIngredients().get(i).getQuantity() + " " + rList.getIngredients().get(i).getMeasure());
 
-            ingredientLayout.addView(ingredint);
+            ingredientLayout.addView(ingredient);
             ingredientLayout.addView(quantityAndMeasure);
         }
 
@@ -77,9 +77,6 @@ public class StepFragment extends Fragment{
         stepsView.setLayoutManager(layoutManager);
 
         ArrayList<Step> newsteps = new ArrayList<>(stepArrayList);
-        if (!newsteps.isEmpty()){
-            Log.d("THIS IS A TEST", newsteps.get(0).getShortDescription());
-        }
 
         stepsAdapter = new StepAdapter(newsteps);
         stepsView.setAdapter(stepsAdapter);

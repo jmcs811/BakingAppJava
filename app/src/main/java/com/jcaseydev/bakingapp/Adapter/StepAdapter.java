@@ -47,13 +47,14 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.stepName.setText(dataSet.get(position).getShortDescription());
         holder.stepCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, StepDetailActivity.class);
+                intent.putExtra("STEPDEETS", dataSet.get(position));
                 context.startActivity(intent);
             }
         });
