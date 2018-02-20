@@ -70,4 +70,11 @@ public class StepDetailFragment extends Fragment {
 
         return v;
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        player.stop();
+        player.release();
+    }
 }
