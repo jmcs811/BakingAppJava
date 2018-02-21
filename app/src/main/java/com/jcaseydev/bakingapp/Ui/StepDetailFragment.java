@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -33,6 +34,7 @@ public class StepDetailFragment extends Fragment {
     SimpleExoPlayer player;
     SimpleExoPlayerView playerView;
     Uri videoURL;
+    TextView stepLongDescp;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,12 +51,19 @@ public class StepDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_step_detail, container, false);
-
-        if (!stepDetails.getVideoUrl().isEmpty()){
-        videoURL = Uri.parse(stepDetails.getVideoUrl());
-
         playerView = v.findViewById(R.id.player_view);
-        playerView.setPlayer(player);
+
+        if (!stepDetails.getVideoUrl().isEmpty()) {
+            videoURL = Uri.parse(stepDetails.getVideoUrl());
+        }else if (!stepDetails.getThumbnail().isEmpty()){
+            videoURL = Uri.parse(stepDetails.getThumbnail());
+        }else{
+            videoURL = null;
+        }
+
+
+        if (videoURL != null) {
+            playerView.setPlayer(player);
 
 
             DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
@@ -64,9 +73,12 @@ public class StepDetailFragment extends Fragment {
 
             player.prepare(mediaSource);
             player.setPlayWhenReady(true);
-        }else {
-            Log.d("ERROR", "VIDEO URL IS EMPTY");
+        }else{
+            playerView.setVisibility(View.INVISIBLE);
         }
+
+        stepLongDescp = v.findViewById(R.id.step_long_descp);
+        stepLongDescp.setText(stepDetails.getDescription());
 
         return v;
     }

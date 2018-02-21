@@ -35,8 +35,8 @@ import okhttp3.Response;
 
 public class MainFragment extends Fragment {
 
-    //String jsonURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
-    String jsonURL = "https://api.myjson.com/bins/oereh";
+    String jsonURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
+    //String jsonURL = "https://api.myjson.com/bins/oereh";
 
     RecyclerView recipeListView;
     RecyclerView.Adapter adapter;
@@ -86,6 +86,7 @@ public class MainFragment extends Fragment {
             final String TAG_SDESCP = "shortDescription";
             final String TAG_DESCP = "description";
             final String TAG_VURL = "videoURL";
+            final String TAG_THUMBNAIL = "thumbnailURL";
             final String TAG_SERVINGS = "servings";
             final String TAG_IMAGE = "image";
 
@@ -134,6 +135,7 @@ public class MainFragment extends Fragment {
                     steps[k].setDescription(stepInfo.getString(TAG_DESCP));
                     steps[k].setId(stepInfo.getInt(TAG_ID));
                     steps[k].setVideoUrl(stepInfo.getString(TAG_VURL));
+                    steps[k].setThumbnail(stepInfo.getString(TAG_THUMBNAIL));
 
                     stepList.add(steps[k]);
                 }

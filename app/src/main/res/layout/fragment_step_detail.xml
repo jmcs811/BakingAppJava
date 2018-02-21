@@ -5,9 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<com.google.android.exoplayer2.ui.SimpleExoPlayerView
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/player_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/step_long_descp"/>
 
 </LinearLayout>
