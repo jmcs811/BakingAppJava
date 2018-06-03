@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_View="http://schemas.android.com/apk/res-auto"
-    android:layout_height="wrap_content"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
-    >
+    android:layout_height="wrap_content">
+
     <android.support.v7.widget.CardView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_gravity="center"
+        android:id="@+id/card_view"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
         android:layout_margin="5dp"
+        android:layout_marginBottom="10dp"
         card_View:cardCornerRadius="10dp"
-        android:id="@+id/card_view">
+        card_View:layout_constraintEnd_toEndOf="parent"
+        card_View:layout_constraintHorizontal_bias="1.0"
+        card_View:layout_constraintStart_toStartOf="parent"
+        card_View:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+
+        <ImageView
+            android:id="@+id/recipe_thumbnail"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:contentDescription="@string/recipe_thumbnail"
+            android:paddingTop="10dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/recipe_thumbnail"
-                android:id="@+id/recipe_thumbnail"
-                android:layout_centerHorizontal="true"
-                android:paddingTop="10dp"/>
+        <TextView
+            android:id="@+id/recipe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/recipe_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:layout_below="@+id/recipe_thumbnail"
-                android:padding="10dp"/>
 
-        </RelativeLayout>
     </android.support.v7.widget.CardView>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

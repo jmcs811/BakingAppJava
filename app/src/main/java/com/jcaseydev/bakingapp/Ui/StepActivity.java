@@ -2,6 +2,7 @@ package com.jcaseydev.bakingapp.Ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -12,7 +13,7 @@ import com.jcaseydev.bakingapp.R;
  * Created by jcasey on 2/8/18.
  */
 
-public class StepActivity extends AppCompatActivity{
+public class StepActivity extends FragmentActivity{
 
     Recipe rList;
     Bundle bundle;
@@ -40,7 +41,6 @@ public class StepActivity extends AppCompatActivity{
                     .add(R.id.step_fragment_container, fragment)
                     .commit();
         }
-
 
     }
 }

@@ -34,6 +34,7 @@ public class StepFragment extends Fragment{
     RecyclerView.LayoutManager layoutManager;
     List<Step> stepArrayList;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

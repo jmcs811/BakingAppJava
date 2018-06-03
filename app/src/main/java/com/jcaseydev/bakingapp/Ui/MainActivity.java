@@ -1,29 +1,26 @@
 package com.jcaseydev.bakingapp.Ui;
 
-import android.support.v4.app.FragmentManager;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.view.View;
 
 import com.jcaseydev.bakingapp.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends SingleFragmentActivity {
+    boolean mIsDualPane;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected Fragment createFragment() {
+        return new MainFragment();
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
-        if (fragment == null){
-            fragment = new MainFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-        }
-
-
+        View articleView = findViewById(R.id.recipe_list);
+        mIsDualPane = articleView != null && articleView.getVisibility() == View.VISIBLE;
     }
 }
+
