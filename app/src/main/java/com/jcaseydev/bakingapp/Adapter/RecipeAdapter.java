@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
-    private ArrayList<Recipe> dataSet = new ArrayList<>();
+    private ArrayList<Recipe> dataSet;
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,6 +62,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 Intent intent = new Intent(newContext, StepActivity.class);
                 intent.putExtra("STEPS", dataSet.get(currentPos));
                 newContext.startActivity(intent);
+
             }
         });
 

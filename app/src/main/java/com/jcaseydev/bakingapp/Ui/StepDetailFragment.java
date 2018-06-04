@@ -36,12 +36,23 @@ public class StepDetailFragment extends Fragment {
     Uri videoURL;
     TextView stepLongDescp;
 
+    private static final String STEPDETAIL_ID = "STEPDETAILS";
+
+    public static StepDetailFragment newInstance(Step stepDetailsList){
+        Bundle args = new Bundle();
+        args.putParcelable(STEPDETAIL_ID, stepDetailsList);
+
+        StepDetailFragment fragment = new StepDetailFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            stepDetails = getArguments().getParcelable("STEP/DETAILS");
+            stepDetails = getArguments().getParcelable(STEPDETAIL_ID);
         }
 
         player = ExoPlayerFactory.newSimpleInstance(getContext(), new DefaultTrackSelector());

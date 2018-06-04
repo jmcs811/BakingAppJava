@@ -34,13 +34,24 @@ public class StepFragment extends Fragment{
     RecyclerView.LayoutManager layoutManager;
     List<Step> stepArrayList;
 
+    private static final String STEP_ID = "test";
+
+    public static StepFragment newInstance(Recipe recipeList){
+        Bundle args = new Bundle();
+        args.putParcelable(STEP_ID, recipeList);
+
+        StepFragment fragment = new StepFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null){
-            rList = getArguments().getParcelable("STEPS/INGREDIENTS");
+            rList = getArguments().getParcelable(STEP_ID);
             if (rList != null) {
                 stepArrayList = rList.getSteps();
             }

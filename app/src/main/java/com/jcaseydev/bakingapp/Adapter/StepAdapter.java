@@ -20,7 +20,8 @@ import java.util.ArrayList;
  */
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
-    private ArrayList<Step> dataSet = new ArrayList<>();
+    private ArrayList<Step> dataSet;
+    private static final String STEPDETAILS = "stepdetails";
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView stepName;
@@ -54,7 +55,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, StepDetailActivity.class);
-                intent.putExtra("STEPDEETS", dataSet.get(position));
+                intent.putExtra(STEPDETAILS, dataSet.get(position));
                 context.startActivity(intent);
             }
         });

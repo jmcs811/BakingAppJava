@@ -13,12 +13,26 @@ import com.jcaseydev.bakingapp.R;
  * Created by jcasey on 2/8/18.
  */
 
-public class StepActivity extends FragmentActivity{
+public class StepActivity extends SingleFragmentActivity{
 
     Recipe rList;
     Bundle bundle;
 
     @Override
+    protected int getLayoutResId(){
+        return R.layout.activity_step;
+    }
+
+    @Override
+    protected Fragment createFragment() {
+     bundle = getIntent().getExtras();
+     if (bundle != null){
+        rList = bundle.getParcelable("STEPS");
+     }
+     return StepFragment.newInstance(rList);
+    }
+
+    /**  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step);
@@ -42,5 +56,5 @@ public class StepActivity extends FragmentActivity{
                     .commit();
         }
 
-    }
+    }**/
 }
