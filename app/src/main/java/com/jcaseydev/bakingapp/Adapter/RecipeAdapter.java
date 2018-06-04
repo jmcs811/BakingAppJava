@@ -2,6 +2,7 @@ package com.jcaseydev.bakingapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
     private ArrayList<Recipe> dataSet;
 
-
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView recipeName;
         ImageView recipeThumbnail;
@@ -42,6 +42,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         dataSet = recipes;
     }
 
+    @NonNull
     @Override
     public RecipeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -62,7 +63,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 Intent intent = new Intent(newContext, StepActivity.class);
                 intent.putExtra("STEPS", dataSet.get(currentPos));
                 newContext.startActivity(intent);
-
             }
         });
 
