@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ import java.util.List;
  */
 
 public class StepFragment extends Fragment{
+    //private Callbacks callBacks;
 
     Recipe rList;
     RecyclerView stepsView;
@@ -36,6 +36,7 @@ public class StepFragment extends Fragment{
 
     private static final String STEP_ID = "test";
 
+    //Consolidated code for starting new StepFragment
     public static StepFragment newInstance(Recipe recipeList){
         Bundle args = new Bundle();
         args.putParcelable(STEP_ID, recipeList);
@@ -65,7 +66,7 @@ public class StepFragment extends Fragment{
 
         LinearLayout ingredientLayout = v.findViewById(R.id.ingredient_layout);
 
-        //Ingredients List
+        //Ingredients List. Setting up views and setting text.
         for (int i = 0; i < rList.getIngredients().size(); i++){
             TextView ingredient = new TextView(getContext());
             TextView quantityAndMeasure = new TextView(getContext());
